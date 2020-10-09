@@ -30,3 +30,36 @@ test('creates email for employee', function() {
 
     expect(employee.email).toBe(testEmail);
 });
+
+// test to get employee name from getName
+test('get employee name from getName()', function() {
+    const testName = "Brian";
+    const employee = new Employee(testName);
+
+    expect(employee.getName()).toBe(testName);
+});
+
+
+// test to get employee id from getId
+test('get employee id from getId()', function() {
+    const testIdFunc = 100;
+    const employee = new Employee('id', testIdFunc);
+
+    expect(employee.getId()).toBe(testIdFunc);
+});
+
+// test to get employee email address from getEmail
+test('get employee email from getEmail()', function() {
+    const testEmailFunc = "test@test.com";
+    const employee = new Employee('email', 100, testEmailFunc);
+
+    expect(employee.getEmail()).toBe(testEmailFunc);
+});
+
+// test to see if getRole returns employee
+test('creates getRole function to return Employee', function() {
+    const testEmp = "Employee";
+    const employee = new Employee("Brian", 100, "test@test.com");
+
+    expect(employee.getRole()).toBe(testEmp);
+});
