@@ -21,5 +21,8 @@
   "homepage": "https://github.com/bspiewak6/profile-generator#readme",
   "devDependencies": {
     "jest": "^26.5.2"
+  },
+  "dependencies": {
+    "inquirer": "^7.3.3"
   }
 }
