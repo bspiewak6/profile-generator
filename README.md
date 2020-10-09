@@ -16,7 +16,7 @@ A managers wants to generate a webpage that displays their team's basic informat
 4. Jest
 
 ## Screenshots
-![Screenshot](./assets/images/Screenshot1.png)
+![Screenshot](./src/images/10-object-oriented-programming-homework-demo.png)
 
 ## Requirements
 1. Create a command-line application that accepts user input
