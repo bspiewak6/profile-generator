@@ -11,12 +11,6 @@ const fs = require('fs');
 const questions = () => {
     return inquirer.prompt([
         {
-            type: 'list',
-            name: 'role',
-            message: 'What is the role of the employee? (Required)',
-            choices: ['Manager', 'Engineer', 'Intern']
-        },
-        {
             type: 'input',
             name: 'name',
             message: 'What is the employee name? (Required)',
@@ -24,7 +18,7 @@ const questions = () => {
                 if (employeeName) {
                     return true;
                 } else {
-                    console.log('Please enter the name of the employee');
+                    console.log('Please enter the name of the employee.');
                     return false;
                 }
             }
@@ -32,53 +26,89 @@ const questions = () => {
         {
             type: 'input',
             name: 'id',
-            message: 'What is the employee id number?',
-            validate: employeeEmail => {
-                if (employeeEmail) {
-                    return true;
-                } else {
-                    console.log('Please enter the employee id number');
-                    return false;
-                }
-            }
+            message: "What is the employee's id number? (Required)",
+            validate: function(value) {
+                var valid = !isNaN(parseFloat(value));
+                return valid || "Please enter the id number of the employee.";
+                },
+                filter: Number
         },
         {
             type: 'input',
             name: 'email',
-            message: 'What is the employee email address?',
-            validate: employeeEmail => {
-                if (employeeEmail) {
+            message: "What is the employee's email address? (Required)",
+            validate: emailInput => {
+                if (emailInput.includes('.com') && emailInput.includes('@')) {
                     return true;
                 } else {
-                    console.log('Please enter the employee email address');
+                    console.log('\n You must enter a valid email address.');
                     return false;
                 }
             }
+        },  
+        {
+            type: 'list',
+            name: 'role',
+            message: 'What is the role of the employee? (Required)',
+            choices: ['Manager', 'Engineer', 'Intern']
         },
     ])
-
-    // if they choose Manager, ask them the following questions:
-    // what is your name?
-    // what is your id?
-    // what is your email?
-    // what is your office number?
-
-    // if they choose Engineer, ask them the following questions:
-    // what is your name?
-    // what is your id?
-    // what is your email?
-    // what is your GitHub username?
-
-    // if they choose Intern, ask them the following questions:
-    // what is your name?
-    // what is your id?
-    // what is your email?
-    // what is the name of the school you graduated from?
-}
+    .then(function(position) {
+        // if they chose Manager, ask what is their office number?
+        if(position.role === "Manager") {
+            return inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'officeNumber',
+                    message: "What is the Manager's office number?",
+                    validate: function(value) {
+                        var valid = !isNaN(parseFloat(value));
+                        return valid || "Please provide the office number";
+                    },
+                    filter: Number
+                }
+            ])
+        }
+        // if they chose Engineer, ask what is their GitHub username?
+        else if (position.role === "Engineer") {
+            return inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'github',
+                    message: "What is the Engineer's github username?",
+                    validate: function(githubInput) {
+                        if (githubInput) {
+                            return true;
+                        } else {
+                            console.log("Please provide the GitHub username for the Engineer.");
+                        }
+                    }
+                }
+            ])
+        }
+        // if they chose Intern, ask what school they go to or graduated from
+        else if (position.role === "Intern") {
+            return inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'school',
+                    message: "What is the name of the Intern's school they attend or have graduated from?",
+                    validate: function(schoolInput) {
+                        if (schoolInput) {
+                            return true;
+                        } else {
+                            console.log("Please provide the name of the intern's school.");
+                        }
+                    }
+                }
+            ])
+        }
+    })
+};
 
 // function to write HTML file
 function writeToFile(fileName, questions) {
-    fileName = fs.writeFile('index.html', generateSite((questions)), function (err) {
+    fileName = fs.writeFile('./dist/index.html', generateSite((questions)), function (err) {
         if (err) {
             console.log('Error: ' + err);
         } else {
@@ -89,13 +119,11 @@ function writeToFile(fileName, questions) {
 // function to initialize program
 function init() {
     questions()
-        .then(data => {
-            console.log(data);
-            writeToFile('index.html', data);
+        .then(employee => {
+            console.log(employee);
+            writeToFile('index.html', employee);
     });
 };
 
 // function call to initialize program
 init();
-
-
