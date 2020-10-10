@@ -1,4 +1,3 @@
-const { expect } = require('@jest/globals');
 const Engineer = require('../lib/Engineer.js');
 // const Employee = require('../lib/Employee.js');
 
@@ -19,7 +18,7 @@ test('gets github username from getGithub()', function() {
 });
 
 // test getRole to see if its overridden to retunr engineer
-test('creates getRole funnction to override and return Engineer', function () {
+test('creates getRole funnction to override and return Engineer', function() {
     const testEng = "Engineer";
     const employee = new Engineer('Brian', 1, 'test@test.com', "username");
 
