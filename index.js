@@ -1,4 +1,3 @@
-// require inquirer npm package
 const inquirer = require("inquirer");
 const generateSite = require('./utils/generateSite');
 const fs = require('fs');
@@ -13,12 +12,12 @@ const questions = () => {
         {
             type: 'input',
             name: 'name',
-            message: 'What is the employee name? (Required)',
-            validate: employeeName => {
-                if (employeeName) {
+            message: "What is the manager's name?",
+            validate: managerName => {
+                if (managerName) {
                     return true;
                 } else {
-                    console.log('Please enter the name of the employee.');
+                    console.log("Please enter the manager's name.");
                     return false;
                 }
             }
@@ -26,17 +25,17 @@ const questions = () => {
         {
             type: 'input',
             name: 'id',
-            message: "What is the employee's id number? (Required)",
+            message: "What is the manager's id number?",
             validate: function(value) {
                 var valid = !isNaN(parseFloat(value));
-                return valid || "Please enter the id number of the employee.";
+                return valid || "Please enter the manager's id number.";
                 },
                 filter: Number
         },
         {
             type: 'input',
             name: 'email',
-            message: "What is the employee's email address? (Required)",
+            message: "What is the manager's email address?",
             validate: emailInput => {
                 if (emailInput.includes('.com') && emailInput.includes('@')) {
                     return true;
@@ -47,30 +46,25 @@ const questions = () => {
             }
         },  
         {
+            type: 'input',
+            name: 'officeNumber',
+            message: "What is the Manager's office number?",
+            validate: function(officeNumber) {
+                var valid = !isNaN(parseFloat(officeNumber));
+                return valid || "Please provide the office number";
+            },
+            filter: Number
+        },
+        {
             type: 'list',
             name: 'role',
-            message: 'What is the role of the employee? (Required)',
-            choices: ['Manager', 'Engineer', 'Intern']
+            message: 'What type of employee do you want to add to your team?',
+            choices: ['Engineer', 'Intern']
         },
     ])
     .then(function(position) {
-        // if they chose Manager, ask what is their office number?
-        if(position.role === "Manager") {
-            return inquirer.prompt([
-                {
-                    type: 'input',
-                    name: 'officeNumber',
-                    message: "What is the Manager's office number?",
-                    validate: function(value) {
-                        var valid = !isNaN(parseFloat(value));
-                        return valid || "Please provide the office number";
-                    },
-                    filter: Number
-                }
-            ])
-        }
         // if they chose Engineer, ask what is their GitHub username?
-        else if (position.role === "Engineer") {
+        if (position.role === "Engineer") {
             return inquirer.prompt([
                 {
                     type: 'input',
@@ -103,18 +97,48 @@ const questions = () => {
                 }
             ])
         }
-    })
+    }) 
 };
 
-// function to write HTML file
+// const addEmployee = employeeData => {
+//     if(!employeeData.teamMember) {
+//         employeeData.teamMember = [];
+//     }
+//     return inquirer.prompt([
+//     // do you want to add another employee?
+//         {
+//             type: 'confirm',
+//             name: 'addEmployee',
+//             message: 'Would you like to add more employees?',
+//             default: true
+//         }
+//     ])
+//         .then(teamMemberData => {
+//             employeeData.teamMember.push(teamMemberData) 
+
+//             if(teamMemberData.addEmployee)
+//             return addEmployee(employeeData);
+//         })
+        
+// };
+    
+// function to write HTML file and move style sheet to dist folder
 function writeToFile(fileName, questions) {
     fileName = fs.writeFile('./dist/index.html', generateSite((questions)), function (err) {
         if (err) {
             console.log('Error: ' + err);
         } else {
-            console.log('= HTML file created as index.html! =');
+            console.log('= Webpage created! Check out index.html in dist folder! =');
         }
     });
+
+    fs.copyFile('./src/style.css', './dist/style.css', err => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log('= Style sheet copied to dist folder successfully!')
+    })
 };
 // function to initialize program
 function init() {

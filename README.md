@@ -1,11 +1,11 @@
 # Profile Generator for Software Engineering Team
 
 ## Description
-A managers wants to generate a webpage that displays their team's basic information so that they have easy access to their emails and GitHub profiles.
+A manager wants to generate a webpage that displays their team's basic information so that they have easy access to their emails and GitHub profiles.
 
 ## Table of Contents
 * [Technologies](#technologies)
-* [Screenshots](#screenshots)
+* [Screenshot](#screenshot)
 * [Requirements](#requirements)
 * [Links](#links)
 
@@ -14,8 +14,10 @@ A managers wants to generate a webpage that displays their team's basic informat
 2. Node.js
 3. Inquirer.js
 4. Jest
+5. HTML
+6. CSS
 
-## Screenshots
+## Screenshot
 ![Screenshot](./src/images/10-object-oriented-programming-homework-demo.png)
 
 ## Requirements
@@ -34,4 +36,4 @@ A managers wants to generate a webpage that displays their team's basic informat
 ## Links
 * [Team Profile Generator Walkthrough Video]()
 * [Team Profile Generated File called index.html]()
-* [Team Profile Generator Repository](https://github.com/bspiewak6/readme-gen)
+* [Team Profile Generator Repository](https://github.com/bspiewak6/team-profile-generator)
