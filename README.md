@@ -18,6 +18,7 @@ A manager wants to generate a webpage that displays their team's basic informati
 6. CSS
 
 ## Screenshot
+Mockup that was given with assignment:
 ![Screenshot](./src/images/10-object-oriented-programming-homework-demo.png)
 
 ## Requirements
@@ -34,6 +35,6 @@ A manager wants to generate a webpage that displays their team's basic informati
 
 
 ## Links
-* [Team Profile Generator Walkthrough Video]()
-* [Team Profile Generated File called index.html]()
+* [Team Profile Generator Walkthrough Video](https://drive.google.com/file/d/1O95uzy1MyqbO4u5NCuUjoxqm0Y2h4YEs/view?usp=sharing)
+* [Team Profile index.html generated with application](https://drive.google.com/file/d/1rUYG0CE5x3HkTdYkQzZptn3SvWUhUgrq/view?usp=sharing)
 * [Team Profile Generator Repository](https://github.com/bspiewak6/team-profile-generator)

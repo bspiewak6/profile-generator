@@ -5,7 +5,7 @@ const Manager = require("./lib/Manager.js");
 const Engineer = require("./lib/Engineer.js");
 const Intern = require("./lib/Intern.js");
 
-// hold team member when the app is running -- array to feed into generateSite -- employees.name, etc.
+// hold team member when the app is running -- array to feed into generateSite
 const employees = [];
 
 // create questions array to build team
@@ -241,101 +241,3 @@ const addEmployee = () => {
 addManager();
 
 
-
-// const employeeQuestions = () => {
-//     return inquirer
-//     .prompt(questions.manager)
-//     .then(managerAnswers => {
-//         console.log('Employee Data:', managerAnswers);
-        
-//        if(managerAnswers.addEmployee) {
-//            const newEmployees = newEmployee();
-//            return [managerAnswers, ...newEmployees];
-//        }
-//        return [managerAnswers];
-//     });
-// };
-
-// const newEmployee = employeeData => {
-//     inquirer.prompt([function (position) {
-//         return inquirer.prompt([
-//             {
-//                 type: 'list',
-//                 name: 'role',
-//                 message: "What is the role of the employee? (Required)",
-//                 choices: ['Engineer', 'Intern']
-//             }
-//         ])
-//         .then((roleResponse) => {
-//             if (roleResponse === "Engineer") {
-//                 return inquirer.prompt([
-//                     {
-//                         type: 'input',
-//                         name: 'github',
-//                         message: "What is the Engineer's GitHub username?",
-//                         validate: function (githubName) {
-//                             if (githubName) {
-//                                 return true;
-//                             } else {
-//                                 console.log("Please provide the Engineer's GitHub username");
-//                             }
-//                         }
-//                     }   
-//                 ]);
-//             } else if (roleResponse === 'Intern') {
-//                 return inquirer
-//                     .prompt([
-//                         {
-//                             type: 'input',
-//                             name: 'schoolName',
-//                             message: "\n What is the name of the Intern's school?",
-//                             validate: function (value) {
-//                                 if (value) {
-//                                     return true;
-//                                 } else {
-//                                     console.log("Please provide the name of this employee's school.");
-//                                 }
-//                             }
-//                         }
-//                     ]);
-//                 }
-//             });
-//         }
-//     ]);
-// };
-
-
-// // function to create team
-// createTeam = () => {
-//     employeeQuestions()
-//         .then(employeeData => {
-//             for (let employee of employeeData) {
-//                 switch (employeeData.role) {
-//                     case 'Engineer':
-//                         employees.push(new Engineer(employee.name, employee.id, employee.email, employee.officeNumber));
-//                         break;
-//                     case 'Intern':
-//                         employees.push(new Intern(employee.name, employee.id, employee.email, employee.officeNumber));
-//                         break;
-//                     default:
-//                         employees.push(new Manager(employee.name, employee.id, employee.email, employee.officeNumber));
-//                         break;
-//                 }
-//             }
-//             console.log(employees);
-//             writeToFile('./dist/index.html', employees);
-//         });
-// };
-
-
-// function to move style sheet to dist folder
-// fs.copyFile('./src/style.css', './dist/style.css', err => {
-//     if (err) {
-//         console.log(err);
-//         return;
-//     }
-//         console.log('= Style sheet copied to dist folder successfully!')
-//     });
-
-// createTeam();
-       
