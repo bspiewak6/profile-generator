@@ -156,7 +156,7 @@ const questions = {
         },
         {
             type: 'input',
-            name: 'schoolName',
+            name: 'school',
             message: "What is the name of the intern's school?",
             validate: function (value) {
                 if (value) {
