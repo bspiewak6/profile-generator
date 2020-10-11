@@ -1,10 +1,9 @@
 const inquirer = require("inquirer");
 const generateSite = require('./utils/generateSite');
 const fs = require('fs');
-
-// const Manager = require("../libs/Manager.js");
-// const Engineer = require("../libs/Engineer.js");
-// const Intern = require("../libs/Intern.js")
+// const Manager = require("./libs/Manager.js");
+// const Engineer = require("./libs/Engineer.js");
+// const Intern = require("./libs/Intern.js")
 
 // create inquirer prompt to ask what role and then additional questions depending on role selected by user
 const questions = () => {
@@ -26,11 +25,11 @@ const questions = () => {
             type: 'input',
             name: 'id',
             message: "What is the manager's id number?",
-            validate: function(value) {
+            validate: function (value) {
                 var valid = !isNaN(parseFloat(value));
                 return valid || "Please enter the manager's id number.";
-                },
-                filter: Number
+            },
+            filter: Number
         },
         {
             type: 'input',
@@ -44,12 +43,12 @@ const questions = () => {
                     return false;
                 }
             }
-        },  
+        },
         {
             type: 'input',
             name: 'officeNumber',
             message: "What is the Manager's office number?",
-            validate: function(officeNumber) {
+            validate: function (officeNumber) {
                 var valid = !isNaN(parseFloat(officeNumber));
                 return valid || "Please provide the office number";
             },
@@ -62,42 +61,42 @@ const questions = () => {
             choices: ['Engineer', 'Intern']
         },
     ])
-    .then(function(position) {
-        // if they chose Engineer, ask what is their GitHub username?
-        if (position.role === "Engineer") {
-            return inquirer.prompt([
-                {
-                    type: 'input',
-                    name: 'github',
-                    message: "What is the Engineer's github username?",
-                    validate: function(githubInput) {
-                        if (githubInput) {
-                            return true;
-                        } else {
-                            console.log("Please provide the GitHub username for the Engineer.");
+        .then(function (position) {
+            // if they chose Engineer, ask what is their GitHub username?
+            if (position.role === "Engineer") {
+                return inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'github',
+                        message: "What is the Engineer's github username?",
+                        validate: function (githubInput) {
+                            if (githubInput) {
+                                return true;
+                            } else {
+                                console.log("Please provide the GitHub username for the Engineer.");
+                            }
                         }
                     }
-                }
-            ])
-        }
-        // if they chose Intern, ask what school they go to or graduated from
-        else if (position.role === "Intern") {
-            return inquirer.prompt([
-                {
-                    type: 'input',
-                    name: 'school',
-                    message: "What is the name of the Intern's school they attend or have graduated from?",
-                    validate: function(schoolInput) {
-                        if (schoolInput) {
-                            return true;
-                        } else {
-                            console.log("Please provide the name of the intern's school.");
+                ])
+            }
+            // if they chose Intern, ask what school they go to or graduated from
+            else if (position.role === "Intern") {
+                return inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'school',
+                        message: "What is the name of the Intern's school they attend or have graduated from?",
+                        validate: function (schoolInput) {
+                            if (schoolInput) {
+                                return true;
+                            } else {
+                                console.log("Please provide the name of the intern's school.");
+                            }
                         }
                     }
-                }
-            ])
-        }
-    }) 
+                ])
+            }
+        })
 };
 
 // const addEmployee = employeeData => {
@@ -119,9 +118,9 @@ const questions = () => {
 //             if(teamMemberData.addEmployee)
 //             return addEmployee(employeeData);
 //         })
-        
+
 // };
-    
+
 // function to write HTML file and move style sheet to dist folder
 function writeToFile(fileName, questions) {
     fileName = fs.writeFile('./dist/index.html', generateSite((questions)), function (err) {
@@ -144,9 +143,8 @@ function writeToFile(fileName, questions) {
 function init() {
     questions()
         .then(employee => {
-            console.log(employee);
             writeToFile('index.html', employee);
-    });
+        });
 };
 
 // function call to initialize program
